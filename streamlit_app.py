@@ -12,9 +12,9 @@ st.set_page_config(page_title='Sales Dashboard', page_icon=':bar_chart:')
 # Display user information at the top of the dashboard
 st.markdown("""
 # Sales Data Dashboard
-Created by: Elias Dahdal (elias_335295)  
+#### MWS_WDA_S24
 Supervisor: Dr. Bassel Alkhatib  
-Collaborator: Natalie Alkalaf (natalie_336924)
+Created by: Elias Dahdal (elias_335295) & Natalie Alkalaf (natalie_336924) 
 """)
 
 # Load and clean data
