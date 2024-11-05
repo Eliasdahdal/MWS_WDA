@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import folium
-from streamlit_folium import st_folium  # Import st_folium to render Folium maps in Streamlit
+from streamlit_folium import st_folium  
 import os
 
 # Set Streamlit page configuration
@@ -12,8 +12,8 @@ st.set_page_config(page_title='Sales Dashboard', page_icon=':bar_chart:')
 # Display user information at the top of the dashboard
 st.markdown("""
 # Sales Data Dashboard
-Created by: Elias Dahdal (elias_335295)
-Supervisor: Dr. Bassel Alkhatib
+Created by: Elias Dahdal (elias_335295)  
+Supervisor: Dr. Bassel Alkhatib  
 Collaborator: Natalie Alkalaf (natalie_336924)
 """)
 
@@ -79,7 +79,7 @@ unique_products = filtered_df['Product'].unique()
 selected_products = st.multiselect(
     'Select products to view',
     unique_products,
-    default=unique_products[:5]  # Select the first 5 products by default
+    default=unique_products 
 )
 
 filtered_df = filtered_df[filtered_df['Product'].isin(selected_products)]
@@ -177,28 +177,35 @@ with tabs[3]:
     st.dataframe(city_df[['CITY', 'formatted_revenue', 'total_units_sold']], use_container_width=True)
 
     # City map visualization
-    def generate_city_map(data):
-        city_coordinates = {
-            "Madrid": [40.4168, -3.7038],
-            "San Rafael": [37.9735, -122.5311],
-            "NYC": [40.7128, -74.0060],
-            "Singapore": [1.3521, 103.8198],
-            "Paris": [48.8566, 2.3522]
-        }
-        data['LAT'] = data['CITY'].map(lambda x: city_coordinates.get(x, [None, None])[0])
-        data['LON'] = data['CITY'].map(lambda x: city_coordinates.get(x, [None, None])[1])
-        data = data.dropna(subset=['LAT', 'LON'])
+def generate_city_map(data):
+    city_coordinates = {
+        "Madrid": [40.4168, -3.7038],
+        "San Rafael": [37.9735, -122.5311],
+        "NYC": [40.7128, -74.0060],
+        "Singapore": [1.3521, 103.8198],
+        "Paris": [48.8566, 2.3522]
+    }
+    # Map city names to coordinates
+    data['LAT'] = data['CITY'].map(lambda x: city_coordinates.get(x, [None, None])[0])
+    data['LON'] = data['CITY'].map(lambda x: city_coordinates.get(x, [None, None])[1])
+    data = data.dropna(subset=['LAT', 'LON'])
 
-        m = folium.Map(location=[20, 0], zoom_start=2, tiles="cartodb positron")
-        for _, row in data.iterrows():
-            folium.CircleMarker(
-                location=[row['LAT'], row['LON']],
-                radius=row['total_revenue'] / 100000,
-                color="blue",
-                fill=True,
-                fill_opacity=0.7,
-                tooltip=f"{row['CITY']}: ${row['total_revenue']:,.2f}"
-            ).add_to(m)
-        st_folium(m, width=700, height=500)
+    # Define the map with a center point and zoom level
+    m = folium.Map(location=[20, 0], zoom_start=2, tiles="cartodb positron")
 
-    generate_city_map(city_df)
+    # Add markers for each city
+    for _, row in data.iterrows():
+        folium.CircleMarker(
+            location=[row['LAT'], row['LON']],
+            radius=row['total_revenue'] / 100000,  # Scale circle size by revenue
+            color="blue",
+            fill=True,
+            fill_opacity=0.7,
+            tooltip=f"{row['CITY']}: ${row['total_revenue']:,.2f}"
+        ).add_to(m)
+
+    # Render the map using st_folium with a defined width and height
+    st_folium(m, width=800, height=500)
+
+# Call generate_city_map inside the City Analysis Tab
+generate_city_map(city_df)
