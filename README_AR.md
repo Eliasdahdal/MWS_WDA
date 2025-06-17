@@ -131,5 +131,5 @@ x-api-key: <your_api_key>
 ---
 
 > المشروع من تنفيذ:  
-> ريم (321116) - سارة (326852) - إلياس (335295)  
-> مشروع MWS_WDC_HW1_F24
+> 
+> Developed by Reem (321116), Sarah (326852), and Elias (335295) – MWS_WDC_HW1_F24
