@@ -4,7 +4,7 @@ A modular e-commerce platform based on Microservices architecture using .NET 7 a
 
 ---
 
-## 🧰 Requirements
+## Requirements
 
 1. **Operating System:** Windows 64-bit
 2. **RabbitMQ Service:**  
@@ -13,19 +13,19 @@ A modular e-commerce platform based on Microservices architecture using .NET 7 a
 
 ---
 
-## 📁 Folder Structure
+## Folder Structure
 
 ```
-📦 OnlineShoppingSystem
-├── 📁 For Win-64                  # Executable services (compiled for Windows 64-bit)
-├── 📁 Source Code                 # Microservices source code
-├── 📄 README.txt                 # Setup instructions (this file in original format)
-├── 📄 Report (DOCX & PDF)        # Project report files
+OnlineShoppingSystem
+├── For Win-64                  # Executable services (compiled for Windows 64-bit)
+├── Source Code                 # Microservices source code
+├── README.txt                  # Setup instructions (this file in original format)
+├── Report (DOCX & PDF)         # Project report files
 ```
 
 ---
 
-## ▶️ Run Instructions
+## Run Instructions
 
 ### 1. Start RabbitMQ
 
@@ -39,7 +39,7 @@ A modular e-commerce platform based on Microservices architecture using .NET 7 a
   net start RabbitMQ
   ```
 
-> ⚠️ Ensure RabbitMQ path is added to the system environment variables if running locally.
+> Ensure RabbitMQ path is added to the system environment variables if running locally.
 
 ---
 
@@ -56,7 +56,7 @@ Go to the `For Win-64` folder and **run these executables in order** (double-cli
 
 ---
 
-## 🔗 API Usage
+## API Usage
 
 Use tools like **Postman** or **Thunder Client** to send requests to the services via the **API Gateway**:  
 `http://localhost:7000/gateway/`
@@ -66,7 +66,7 @@ Use tools like **Postman** or **Thunder Client** to send requests to the service
 x-api-key: <your_api_key>
 ```
 
-### 🔑 API Keys by Role
+### API Keys by Role
 
 | Role   | Key    | Permissions               |
 |--------|--------|---------------------------|
@@ -76,7 +76,7 @@ x-api-key: <your_api_key>
 
 ---
 
-## 📌 Services and Endpoints
+## Services and Endpoints
 
 ### 1. **User Management**
 - **Endpoint:** `/users`
@@ -116,7 +116,7 @@ x-api-key: <your_api_key>
 
 ---
 
-## ⚠️ Notes & Tips
+## Notes & Tips
 
 - **RabbitMQ** is required for all service communication via publish-subscribe model.
 - Requests without a valid `x-api-key` will receive a `401 Unauthorized` response.
